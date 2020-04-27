@@ -1,0 +1,10 @@
+<resources>
+  <string name="app_name">ImdbExplorer</string>
+  <string name="synopsis">Synopsis</string>
+  <string name="writer">Writer</string>
+  <string name="director">Director</string>
+  <string name="actors">Actors</string>
+  <string name="metascore">Metascore</string>
+  <string name="votes">Votes</string>
+  <string name="popularity">Popularity</string>
+</resources>

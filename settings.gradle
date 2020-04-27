@@ -1,0 +1,2 @@
+rootProject.name='ImdbExplorer'
+include ':app'

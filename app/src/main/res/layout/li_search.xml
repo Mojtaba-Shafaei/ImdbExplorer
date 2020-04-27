@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:layout_gravity="center_horizontal"
+  android:clickable="true"
+  android:descendantFocusability="blocksDescendants"
+  android:focusable="true"
+  android:padding="0dp"
+  app:cardBackgroundColor="@color/colorPrimary"
+  app:cardCornerRadius="8dp"
+  app:cardElevation="2dp"
+  app:cardPreventCornerOverlap="true"
+  app:cardUseCompatPadding="true"
+  app:contentPadding="0dp"
+  app:layout_insetEdge="none"
+  app:strokeWidth="0dp">
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="8dp">
+    <!-- NOTE: Keep Width and Height of ImageView as fixed dimension for better scrolling performance in adapter and gridView -->
+    <androidx.appcompat.widget.AppCompatImageView
+      android:id="@+id/iv_poster"
+      android:layout_width="@dimen/grid_column_with"
+      android:layout_height="246dp"
+      android:scaleType="fitCenter"
+      tools:src="@tools:sample/avatars" />
+
+    <com.google.android.material.textview.MaterialTextView
+      android:id="@+id/tv_title"
+      style="@style/TextAppearance.MaterialComponents.Subtitle1"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginHorizontal="8dp"
+      android:layout_marginTop="4dp"
+      android:ellipsize="end"
+      android:maxLines="3"
+      android:textAllCaps="false"
+      tools:text="@tools:sample/lorem/random" />
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginTop="2dp"
+      android:paddingStart="8dp"
+      android:paddingEnd="8dp">
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_year"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        tools:text="@tools:sample/date/ddmmyy" />
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_type"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        tools:text="type" />
+    </FrameLayout>
+  </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

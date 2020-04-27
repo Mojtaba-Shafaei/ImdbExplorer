@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <color name="colorPrimaryDark">#121212</color>
+  <color name="colorPrimary">#161616</color>
+  <color name="colorPrimaryLight">#1f1f1f</color>
+  <color name="colorAccent">@color/amber600</color>
+
+
+  <color name="amber600">#FFB300</color>
+  <color name="white">#FFFFFFFF</color>
+  <color name="color_amber600_transparent40">#40FFB300</color>
+  <color name="transparent">#00FFFFFF</color>
+  <color name="colorBackgroundGlassier">#DF000000</color>
+</resources>
