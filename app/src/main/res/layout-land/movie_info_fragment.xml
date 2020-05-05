@@ -1,233 +1,239 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
   xmlns:tools="http://schemas.android.com/tools"
   android:id="@+id/l_root"
   android:layout_width="match_parent"
-  android:layout_height="match_parent">
-  <androidx.constraintlayout.widget.ConstraintLayout
+  android:layout_height="match_parent"
+  android:orientation="vertical">
+
+  <FrameLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorBackgroundGlassier"
-    android:paddingStart="@dimen/activity_horizontal_padding"
-    android:paddingTop="16dp"
-    android:paddingEnd="@dimen/activity_horizontal_padding">
+    android:layout_height="wrap_content">
 
-    <androidx.appcompat.widget.AppCompatImageButton
-      android:id="@+id/btn_back2"
-      android:layout_width="@dimen/squareButtonWidth"
-      android:layout_height="@dimen/squareButtonWidth"
-      android:background="@color/transparent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
-      app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:paddingTop="16dp">
 
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_year"
-      style="@style/TextAppearance.MaterialComponents.Subtitle2"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="72dp"
-      android:gravity="start|bottom"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="@id/btn_back2"
-      tools:text="2004" />
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_duration"
-      style="@style/TextAppearance.MaterialComponents.Body2"
-      android:layout_width="72dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="24dp"
-      android:layout_marginEnd="16dp"
-      android:gravity="center"
-      android:inputType="text"
-      app:layout_constraintBottom_toBottomOf="@id/tv_year"
-      app:layout_constraintStart_toEndOf="@id/tv_year"
-      app:layout_constraintTop_toTopOf="@id/tv_year"
-      tools:text="2h 14min" />
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_subject"
-      style="@style/TextAppearance.MaterialComponents.Body2"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="start|center_vertical"
-      android:layout_marginStart="24dp"
-      android:layout_marginEnd="16dp"
-      android:ellipsize="end"
-      android:gravity="center_vertical"
-      android:inputType="text|textCapWords|textMultiLine"
-      android:lines="1"
-      app:layout_constraintBottom_toBottomOf="@id/tv_year"
-      app:layout_constraintEnd_toStartOf="@id/tv_stars"
-      app:layout_constraintTop_toTopOf="@id/tv_year"
-      tools:text="Action, Drama, War" />
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_stars"
-      style="@style/TextAppearance.MaterialComponents.Body2"
-      android:layout_width="72dp"
-      android:layout_height="wrap_content"
-      android:layout_gravity="end|center_vertical"
-      android:drawablePadding="8dp"
-      android:gravity="center_vertical"
-      android:inputType="text"
-      app:drawableStartCompat="@drawable/ic_star_amber600_24dp"
-      app:layout_constraintBottom_toBottomOf="@id/tv_year"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintTop_toTopOf="@id/tv_year"
-      tools:text="7.6" />
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_title"
-      style="@style/TextAppearance.MaterialComponents.Headline5"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_weight="1"
-      android:inputType="text|textCapWords"
-      android:textColor="@color/white"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="@id/tv_year"
-      app:layout_constraintTop_toBottomOf="@id/tv_year"
-      tools:text="Fury" />
-
-    <HorizontalScrollView
-      android:id="@+id/scl_ratings"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:baselineAligned="false"
-      android:scrollbarAlwaysDrawHorizontalTrack="true"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/btn_back2"
-      app:layout_goneMarginTop="0dp">
-      <LinearLayout
-        android:id="@+id/l_ratings"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center_horizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_title" />
-    </HorizontalScrollView>
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_synopsis_title"
-      style="@style/TextAppearance.MaterialComponents.Body1"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:text="@string/synopsis"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/scl_ratings" />
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_synopsis"
-      style="@style/TextAppearance.MaterialComponents.Body2"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="2dp"
-      android:maxLines="5"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_synopsis_title"
-      tools:text="@tools:sample/lorem/random" />
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_director_title"
-      style="@style/TextAppearance.MaterialComponents.Subtitle2"
-      android:layout_width="72dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="8dp"
-      android:gravity="start|center_vertical"
-      android:text="@string/director"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_synopsis" />
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_director"
-      style="@style/TextAppearance.MaterialComponents.Body2"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:gravity="start|center_vertical"
-      android:inputType="text|textCapWords"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@id/tv_director_title"
-      app:layout_constraintTop_toTopOf="@id/tv_director_title"
-      tools:text="David Ayerr" />
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_writer_title"
-      style="@style/TextAppearance.MaterialComponents.Subtitle2"
-      android:layout_width="72dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="4dp"
-      android:gravity="start|center_vertical"
-      android:text="@string/writer"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_director_title" />
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_writer"
-      style="@style/TextAppearance.MaterialComponents.Body2"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:gravity="start|center_vertical"
-      android:inputType="text|textCapWords"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@id/tv_director_title"
-      app:layout_constraintTop_toTopOf="@id/tv_writer_title"
-      tools:text="David Ayerr" />
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_actors_title"
-      style="@style/TextAppearance.MaterialComponents.Subtitle2"
-      android:layout_width="72dp"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="4dp"
-      android:gravity="start|center_vertical"
-      android:inputType="text|textCapWords"
-      android:text="@string/actors"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toBottomOf="@id/tv_writer_title" />
-
-    <com.google.android.material.textview.MaterialTextView
-      android:id="@+id/tv_actors"
-      style="@style/TextAppearance.MaterialComponents.Body2"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:ellipsize="end"
-      android:gravity="start|center_vertical"
-      android:inputType="text|textCapWords|textMultiLine"
-      android:maxLines="2"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toEndOf="@id/tv_director_title"
-      app:layout_constraintTop_toTopOf="@id/tv_actors_title"
-      tools:text="Brad Pit, Shia LaBeouf, see all" />
-
-    <FrameLayout
-      android:id="@+id/l_loading"
-      android:layout_width="0dp"
-      android:layout_height="0dp"
-      android:background="@color/colorPrimary"
-      android:visibility="gone"
-      app:layout_constraintBottom_toBottomOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent">
-      <androidx.core.widget.ContentLoadingProgressBar
-        style="@style/Widget.AppCompat.ProgressBar"
+      <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_back2"
         android:layout_width="@dimen/squareButtonWidth"
         android:layout_height="@dimen/squareButtonWidth"
-        android:layout_gravity="center"
-        android:indeterminate="true"
-        android:indeterminateBehavior="repeat"
-        android:indeterminateOnly="true"
-        tools:visibility="visible" />
-    </FrameLayout>
-  </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:background="@color/transparent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back_white_24dp" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_year"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="72dp"
+        android:gravity="start|bottom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_back2"
+        tools:text="2004" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_duration"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center"
+        android:inputType="text"
+        app:layout_constraintBottom_toBottomOf="@id/tv_year"
+        app:layout_constraintStart_toEndOf="@id/tv_year"
+        app:layout_constraintTop_toTopOf="@id/tv_year"
+        tools:text="2h 14min" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_subject"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center_vertical"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="16dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical"
+        android:inputType="text|textCapWords|textMultiLine"
+        android:lines="1"
+        app:layout_constraintBottom_toBottomOf="@id/tv_year"
+        app:layout_constraintEnd_toStartOf="@id/tv_stars"
+        app:layout_constraintTop_toTopOf="@id/tv_year"
+        tools:text="Action, Drama, War" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_stars"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|center_vertical"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:drawablePadding="8dp"
+        android:gravity="center_vertical"
+        android:inputType="text"
+        app:drawableStartCompat="@drawable/ic_star_amber600_24dp"
+        app:layout_constraintBottom_toBottomOf="@id/tv_year"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_year"
+        tools:text="7.6" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_title"
+        android:layout_width="0dp"
+        android:layout_height="64dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:layout_weight="1"
+        android:ellipsize="marquee"
+        android:gravity="center_vertical|start"
+        android:inputType="text|textCapWords|textNoSuggestions|textMultiLine"
+        android:textColor="@color/white"
+        app:autoSizeMaxTextSize="28sp"
+        app:autoSizeMinTextSize="16sp"
+        app:autoSizeStepGranularity="2sp"
+        app:autoSizeTextType="uniform"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/tv_year"
+        app:layout_constraintTop_toBottomOf="@id/tv_year"
+        tools:text="@tools:sample/lorem/random" />
+
+      <HorizontalScrollView
+        android:id="@+id/scl_ratings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:baselineAligned="false"
+        android:scrollbarAlwaysDrawHorizontalTrack="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_title"
+        app:layout_goneMarginTop="0dp">
+        <LinearLayout
+          android:id="@+id/l_ratings"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:gravity="center_horizontal"
+          android:orientation="horizontal"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/tv_title" />
+      </HorizontalScrollView>
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_synopsis_title"
+        style="@style/TextAppearance.MaterialComponents.Body1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:text="@string/synopsis"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/scl_ratings" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_synopsis"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:maxLines="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_synopsis_title"
+        tools:text="@tools:sample/lorem/random" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_director_title"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginTop="8dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/director"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_synopsis" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_director"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+        android:gravity="start|center_vertical"
+        android:inputType="text|textCapWords"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tv_director_title"
+        app:layout_constraintTop_toTopOf="@id/tv_director_title"
+        tools:text="David Ayerr" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_writer_title"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="start|center_vertical"
+        android:text="@string/writer"
+        app:layout_constraintStart_toStartOf="@id/tv_director_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_director_title" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_writer"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:inputType="text|textCapWords"
+        app:layout_constraintEnd_toEndOf="@id/tv_director"
+        app:layout_constraintStart_toEndOf="@id/tv_director_title"
+        app:layout_constraintTop_toTopOf="@id/tv_writer_title"
+        tools:text="David Ayerr" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_actors_title"
+        style="@style/TextAppearance.MaterialComponents.Subtitle2"
+        android:layout_width="72dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="start|center_vertical"
+        android:inputType="text|textCapWords"
+        android:text="@string/actors"
+        app:layout_constraintStart_toStartOf="@id/tv_director_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_writer_title" />
+
+      <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_actors"
+        style="@style/TextAppearance.MaterialComponents.Body2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:gravity="start|center_vertical"
+        android:inputType="text|textCapWords|textMultiLine"
+        android:maxLines="2"
+        app:layout_constraintEnd_toEndOf="@id/tv_director"
+        app:layout_constraintStart_toEndOf="@id/tv_director_title"
+        app:layout_constraintTop_toTopOf="@id/tv_actors_title"
+        tools:text="Brad Pit, Shia LaBeouf, see all" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.mojtaba_shafaei.android.ErrorMessage
+      android:id="@+id/error_message"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:background="@color/colorPrimary"
+      android:visibility="gone" />
+  </FrameLayout>
+</ScrollView>

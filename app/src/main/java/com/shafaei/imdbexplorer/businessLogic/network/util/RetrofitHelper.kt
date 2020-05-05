@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit.MINUTES
 import java.util.concurrent.TimeUnit.SECONDS
 
-object RetrofitHelper {
+class RetrofitHelper {
   val retrofit: Retrofit
     get() {
       val clientBuilder = OkHttpClient.Builder()

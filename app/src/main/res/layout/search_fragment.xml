@@ -5,8 +5,8 @@
   android:id="@+id/l_root"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  android:paddingStart="16dp"
-  android:paddingEnd="16dp"
+  android:paddingStart="@dimen/activity_horizontal_margin"
+  android:paddingEnd="@dimen/activity_horizontal_margin"
   tools:context=".ui.main.search.SearchFragment">
 
   <androidx.appcompat.widget.SearchView
@@ -32,10 +32,20 @@
     android:indeterminate="true"
     android:indeterminateBehavior="repeat"
     android:visibility="gone"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="@id/search_view"
+    app:layout_constraintStart_toStartOf="@id/search_view"
     app:layout_constraintTop_toBottomOf="@id/search_view"
     app:layout_goneMarginTop="0dp" />
+
+  <androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/coordinator_of_searchView"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:rotation="180"
+    app:layout_constraintEnd_toEndOf="@id/search_view"
+    app:layout_constraintStart_toStartOf="@id/search_view"
+    app:layout_constraintTop_toBottomOf="@id/prg_loading" />
 
   <GridView
     android:id="@+id/rv_list"
@@ -53,7 +63,6 @@
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@id/search_view"
+    app:layout_constraintTop_toBottomOf="@id/coordinator_of_searchView"
     tools:listitem="@layout/li_search" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

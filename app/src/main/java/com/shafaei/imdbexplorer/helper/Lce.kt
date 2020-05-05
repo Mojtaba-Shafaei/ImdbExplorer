@@ -11,7 +11,7 @@ package com.shafaei.imdbexplorer.helper
 data class Lce<T>(
   val firstLoading: Boolean = false,
   val loading: Boolean = false,
-  val error: Exception? = null,
+  val error: Throwable? = null,
   val data: T? = null
 ) {
 
@@ -24,7 +24,7 @@ data class Lce<T>(
       return Lce<T>(loading = true)
     }
 
-    fun <T> failure(exception: Exception): Lce<T> {
+    fun <T> failure(exception: Throwable): Lce<T> {
       return Lce<T>(error = exception)
     }
 

@@ -1,15 +1,13 @@
 package com.shafaei.imdbexplorer.di
 
 import com.shafaei.imdbexplorer.businessLogic.network.NetworkMovieBl
-import com.shafaei.imdbexplorer.ui.main.movieInfo.MovieInfoViewModel
-import com.shafaei.imdbexplorer.ui.main.search.SearchViewModel
+import com.shafaei.imdbexplorer.businessLogic.network.util.RetrofitHelper
+import com.shafaei.imdbexplorer.ui.main.MainViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 val appModule = module {
-
-  single<NetworkMovieBl> { NetworkMovieBl() }
-
-  viewModel { SearchViewModel(get()) }
-  viewModel { MovieInfoViewModel(get()) }
+  single<RetrofitHelper> { RetrofitHelper() }
+  single<NetworkMovieBl> { NetworkMovieBl(get()) }
+  viewModel { MainViewModel(get()) }
 }

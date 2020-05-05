@@ -11,8 +11,8 @@ android {
         applicationId "com.shafaei.imdbexplorer"
         minSdkVersion 17
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.0.0"
         vectorDrawables.useSupportLibrary = true
 
         multiDexEnabled true
@@ -113,6 +113,10 @@ dependencies {
     // dependency to appear on your APK's compile classpath or the test APK
     // classpath.
     androidTestImplementation 'androidx.test.espresso:espresso-idling-resource:3.2.0'
+
+
+    implementation 'com.github.Mojtaba-Shafaei:AndroidErrorMessage:1.2.6'
+
 }
 
 task deleteOldApk(type: Delete) {

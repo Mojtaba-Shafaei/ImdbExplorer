@@ -63,10 +63,26 @@ class SearchAdapter(val inflater: LayoutInflater) : BaseAdapter() {
     return mData[position].imdbId.hashCode().toLong()
   }
 
-  fun setData(data: List<Search>) {
-    mData.clear()
-    mData.addAll(data)
-    notifyDataSetChanged()
+  /**
+   * @return True if dataSet changed
+   */
+  fun setData(data: List<Search>): Boolean {
+    var isEqual: Boolean = data.size == mData.size
+    if (isEqual) {
+      mData.forEachIndexed { index, search ->
+        if (search != data[index]) {
+          isEqual = false
+          return@forEachIndexed
+        }
+      }
+    }
+    if (isEqual.not()) {
+      mData.clear()
+      mData.addAll(data)
+      notifyDataSetChanged()
+      return true
+    }
+    return false
   }
 
   fun clear() {

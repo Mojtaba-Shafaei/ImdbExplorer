@@ -57,7 +57,7 @@ data class NetworkMovie(
   @SerializedName("imdbVotes") @Expose var imdbVotes: String,
   @SerializedName("imdbID") @Expose var imdbID: String,
   @SerializedName("Type") @Expose var type: String,
-  @SerializedName("DVD") @Expose var dvd: String,
+  @SerializedName("DVD") @Expose var dvd: String?,
   @SerializedName("BoxOffice") @Expose var boxOffice: String,
   @SerializedName("Production") @Expose var production: String,
   @SerializedName("Website") @Expose var website: String,

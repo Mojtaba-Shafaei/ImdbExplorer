@@ -33,9 +33,15 @@ implemented based on OMDb API(
 #### Landscape
 ![img_search_land.png](screen_captures/img_search_land.png)&nbsp;![img_info_land.png](screen_captures/img_info_land.png)
 
+#### Tablet
+![img_tablet_port.png](screen_captures/img_tablet_port.png)&nbsp;![img_tablet_land.png](screen_captures/img_tablet_land.png)
+
 #### Video
 <a href="https://youtu.be/HPLzdtS0s8I"
-rel="YouTube">![Foo](screen_captures/video_mock.png)</a>
+rel="YouTube">![Mobile device](screen_captures/video_mock.png)</a>
+
+<a href="https://youtu.be/5_Dj9aiZK0A"
+rel="YouTube">![Mobile device](screen_captures/video_mock_tablet.png)</a>
 
 
 ### APK File

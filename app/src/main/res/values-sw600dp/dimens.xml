@@ -2,4 +2,5 @@
 <resources>
   <dimen name="squareButtonWidth">56dp</dimen>
   <dimen name="activity_horizontal_padding">64dp</dimen>
+  <dimen name="marginStart_btn_back">48dp</dimen>
 </resources>

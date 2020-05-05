@@ -9,7 +9,7 @@ import com.shafaei.imdbexplorer.businessLogic.entity.RatingType.IMDB
  */
 data class Movie(
   val title: String,
-  val year: Int,
+  val year: String,
   val rated: String,
   val released: String,
   val runtime: String,
@@ -28,10 +28,10 @@ data class Movie(
   val imdbVotes: String,
   val imdbID: String,
   val type: String,
-  val dvd: String,
-  val boxOffice: String,
-  val production: String,
-  val website: String,
+//  val dvd: String?,
+//  val boxOffice: String,
+//  val production: String,
+//  val website: String,
   val response: Boolean,
   val error: String? = null
 ) {
@@ -53,7 +53,7 @@ data class Movie(
 
       return Movie(
         title = networkMovie.title,
-        year = networkMovie.year.toInt(),
+        year = networkMovie.year,
         rated = networkMovie.rated,
         released = networkMovie.released,
         runtime = networkMovie.runtime,
@@ -72,10 +72,10 @@ data class Movie(
         imdbVotes = networkMovie.imdbVotes,
         imdbID = networkMovie.imdbID,
         type = networkMovie.type,
-        dvd = networkMovie.dvd,
-        boxOffice = networkMovie.boxOffice,
-        production = networkMovie.production,
-        website = networkMovie.website,
+//        dvd = networkMovie.dvd,
+//        boxOffice = networkMovie.boxOffice,
+//        production = networkMovie.production,
+//        website = networkMovie.website,
         response = networkMovie.response,
         error = networkMovie.error
       )

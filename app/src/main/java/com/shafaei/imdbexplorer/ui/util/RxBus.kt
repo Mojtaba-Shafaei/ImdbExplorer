@@ -45,12 +45,10 @@ object RxBus {
 }
 
 enum class EventEnum {
-  MOVIE_ITEM_CLICK,
-  MOVIE_INFO_BACK_CLICK, // its a bridge action between fragments
-  SHOW_MOVIE_INFO
+  EVENT_SEARCH_ITEM_CLICKED,
+  EVENT_MOVIE_INFO_BACK_CLICK, // its a bridge action between fragments
 }
 
 enum class LifeCyclesEnum {
-  MAIN_ACTIVITY,
-  FRAGMENT_MOVIE_INFO
+  MAIN_ACTIVITY
 }

@@ -18,7 +18,7 @@ fun <T> Observable<Lce<T>>.onErrorResumeNextLceFailure(action: (() -> Lce<T>)? =
   return this.compose { upstream ->
     upstream.onErrorResumeNext { t: Throwable ->
       Observable.just(
-        action?.invoke() ?: Lce.failure<T>(if (t is Exception) t else Exception(t))
+        action?.invoke() ?: Lce.failure<T>(t)
       )
     }
   }
@@ -26,7 +26,7 @@ fun <T> Observable<Lce<T>>.onErrorResumeNextLceFailure(action: (() -> Lce<T>)? =
 
 fun <T> Flowable<Lce<T>>.onErrorResumeNextLceFailure(): Flowable<Lce<T>> {
   return this.compose { upstream ->
-    upstream.onErrorResumeNext { t: Throwable -> Flowable.just(Lce.failure<T>(if (t is Exception) t else Exception(t))) }
+    upstream.onErrorResumeNext { t: Throwable -> Flowable.just(Lce.failure<T>(t)) }
   }
 }
 

@@ -1,11 +1,14 @@
 package com.shafaei.imdbexplorer.ui.main.movieInfo
 
 import android.graphics.Bitmap
+import android.graphics.PorterDuff.Mode.SRC_ATOP
+import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.load.DataSource
@@ -14,46 +17,41 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
-import com.google.android.material.snackbar.Snackbar
 import com.jakewharton.rxbinding3.view.clicks
+import com.mojtaba_shafaei.android.ErrorMessage.State
 import com.shafaei.imdbexplorer.R
-import com.shafaei.imdbexplorer.businessLogic.entity.PlotType.FULL
-import com.shafaei.imdbexplorer.businessLogic.entity.param.MovieParam
 import com.shafaei.imdbexplorer.ui.kotlinExt.composeClicks
 import com.shafaei.imdbexplorer.ui.kotlinExt.onErrorResumeNextLceFailure
-import com.shafaei.imdbexplorer.ui.util.EventEnum.MOVIE_INFO_BACK_CLICK
-import com.shafaei.imdbexplorer.ui.util.EventEnum.SHOW_MOVIE_INFO
+import com.shafaei.imdbexplorer.ui.main.MainViewModel
+import com.shafaei.imdbexplorer.ui.util.EventEnum.EVENT_MOVIE_INFO_BACK_CLICK
 import com.shafaei.imdbexplorer.ui.util.GlideApp
-import com.shafaei.imdbexplorer.ui.util.LifeCyclesEnum.FRAGMENT_MOVIE_INFO
 import com.shafaei.imdbexplorer.ui.util.RxBus
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.plusAssign
 import kotlinx.android.synthetic.main.layout_title_subtitle_vertically.view.*
 import kotlinx.android.synthetic.main.movie_info_fragment.*
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MovieInfoFragment : Fragment() {
   private val mDisposables = CompositeDisposable()
-  private val mViewModel: MovieInfoViewModel by viewModel() // get ViewModel and inject required dependencies by koin
-  private lateinit var mIMdbID: String
-
-  private var mSnackBar: Snackbar? = null
+  private var mIsTwoPaneAvailable: Boolean = false
+  private val mViewModel: MainViewModel by sharedViewModel() // get Activity's ViewModel and inject required dependencies by Koin
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
   companion object {
 
-    private const val KEY_IMDB_ID = "imdb_id"
-    fun newInstance(imdbID: String): MovieInfoFragment {
-      val f = MovieInfoFragment()
-      f.arguments = bundleOf(KEY_IMDB_ID to imdbID)
-      return f
+    private const val KEY_TWO_PANE_AVAILABLE = "key_two_pane"
+    fun newInstance(isTwoPaneAvailable: Boolean): MovieInfoFragment {
+      return MovieInfoFragment().apply {
+        arguments = bundleOf(KEY_TWO_PANE_AVAILABLE to isTwoPaneAvailable)
+      }
     }
   }
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    mIMdbID = requireArguments().getString(KEY_IMDB_ID)!!
+    mIsTwoPaneAvailable = requireArguments().getBoolean(KEY_TWO_PANE_AVAILABLE)
   }
 
   override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -63,20 +61,17 @@ class MovieInfoFragment : Fragment() {
   override fun onActivityCreated(savedInstanceState: Bundle?) {
     super.onActivityCreated(savedInstanceState)
     initUi()
-    loadMovie()
-  }
-
-  private fun loadMovie() {
-    mViewModel.loadMovieInfo(MovieParam(id = mIMdbID, plot = FULL))
   }
 
   /**
    * init UI font, colors, drawables and etc...
    */
   private fun initUi() {
-    val isTablet = resources.getBoolean(R.bool.is_tablet)
-    if (isTablet) {
+    if (mIsTwoPaneAvailable) {
       btn_back2.visibility = View.GONE
+      error_message.state = State.message(getString(R.string.message_select_movie))
+    } else {
+      error_message.state = State.loading()
     }
   }
 
@@ -92,23 +87,17 @@ class MovieInfoFragment : Fragment() {
         .composeClicks()
         .observeOn(AndroidSchedulers.mainThread())
         .doOnError { throwable: Throwable -> showError(throwable) }
-        .subscribe { RxBus.publish(MOVIE_INFO_BACK_CLICK, "N/A") }
-
-    RxBus.subscribe(SHOW_MOVIE_INFO, FRAGMENT_MOVIE_INFO) {
-      // this action will call if and if the device is tablet, otherwise fragment works from onCreate() and get imdbID through that
-      mIMdbID = it as String
-      loadMovie()
-    }
+        .subscribe { RxBus.publish(EVENT_MOVIE_INFO_BACK_CLICK, "N/A") }
   }
 
   private fun bindStates() {
     mDisposables +=
-      mViewModel.states
+      mViewModel.infoStates
         .observeOn(AndroidSchedulers.mainThread())
         .onErrorResumeNextLceFailure()
         .subscribe { lce ->
           if (lce.firstLoading) {
-            showLoading()
+            error_message.state = State.loading()
           }
 
           if (lce.isFailure()) {
@@ -116,7 +105,7 @@ class MovieInfoFragment : Fragment() {
           }
 
           lce.data?.let {
-            tv_year.text = it.year.toString()
+            tv_year.text = it.year
             tv_title.text = it.title
 
             l_ratings.removeAllViews()
@@ -151,43 +140,32 @@ class MovieInfoFragment : Fragment() {
                   }
 
                   override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                    activity!!.runOnUiThread { l_root.background = resource }
+                    if (isVisible && resource != null) {
+                      resource.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(requireActivity(), R.color.colorBackgroundGlassier), SRC_ATOP)
+                      requireActivity().runOnUiThread { l_root.background = resource }
+                    }
+
                     return true
                   }
 
                 })
                 .submit()
-
             }
           }
 
           if (lce.firstLoading.not() && lce.isFailure().not()) {
-            l_loading.visibility = View.GONE
+            error_message.state = State.hidden()
           }
         }
   }
 
   private fun showError(throwable: Throwable) {
-    mSnackBar = Snackbar.make(l_root, "Data not received successfully,${throwable.message}", Snackbar.LENGTH_INDEFINITE)
-      .setAnimationMode(Snackbar.ANIMATION_MODE_SLIDE)
-      .setAction("Retry") { loadMovie() }
-    mSnackBar?.show()
-  }
-
-  private fun showLoading() {
-    l_loading.visibility = View.VISIBLE
+    error_message.state = State.error(message = "Data not received successfully,${throwable.message}")
   }
 
   override fun onStop() {
     mDisposables.clear()
-    RxBus.unSubscribe(FRAGMENT_MOVIE_INFO)
     super.onStop()
   }
 
-  override fun onDestroyView() {
-    mSnackBar?.let {
-      if (it.isShownOrQueued) it.dismiss()
-    }
-    super.onDestroyView()
-  }
 }

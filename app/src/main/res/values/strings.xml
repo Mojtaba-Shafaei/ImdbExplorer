@@ -7,4 +7,10 @@
   <string name="metascore">Metascore</string>
   <string name="votes">Votes</string>
   <string name="popularity">Popularity</string>
+  <string name="message_select_movie">Select a movie to display information</string>
+  <string name="movieNotFoundException">Movie Not Found!</string>
+  <string name="tooManyResultException">Enter movie name, more precisely.</string>
+  <string name="internetException">Connection is lost. Check Your Internet!</string>
+  <string name="unknownException">Data not retrieved</string>
+  <string name="retry">Retry</string>
 </resources>
