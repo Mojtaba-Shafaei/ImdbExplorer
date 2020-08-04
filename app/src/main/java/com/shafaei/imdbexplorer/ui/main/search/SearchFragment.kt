@@ -111,12 +111,17 @@ class SearchFragment : Fragment() {
             }
 
             state.data?.let {
-              val adapterDataSetChanged = mAdapter.setData(it)
+              val adapterDataSetChanged = mAdapter.setData(it.searchList)
               if (adapterDataSetChanged) {
                 // scroll to previous grid position, that before of User leave this fragment
                 mViewModel.mFirstItemInView?.let { pos ->
                   rv_list.postDelayed({ rv_list.smoothScrollToPosition(pos);rv_list.setSelection(pos) }, 500)
                 }
+              }
+
+              // restore params in ui data,
+              if (search_view.query != it.searchParams.movieTitle) {
+                search_view.setQuery(it.searchParams.movieTitle, false)
               }
             }
 

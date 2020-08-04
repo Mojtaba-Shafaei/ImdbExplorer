@@ -8,6 +8,7 @@ import com.shafaei.imdbexplorer.businessLogic.entity.param.*
 import com.shafaei.imdbexplorer.businessLogic.network.NetworkMovieBl
 import com.shafaei.imdbexplorer.helper.Lce
 import com.shafaei.imdbexplorer.ui.kotlinExt.onErrorResumeNextLceFailure
+import com.shafaei.imdbexplorer.ui.main.search.SearchUiData
 import io.reactivex.BackpressureStrategy.LATEST
 import io.reactivex.Flowable
 import io.reactivex.disposables.CompositeDisposable
@@ -26,10 +27,10 @@ class MainViewModel(private val networkMovieBl: NetworkMovieBl) : ViewModel() {
   private val mSubjectSearch: PublishSubject<SearchParam> = PublishSubject.create()
   private val mPageIndicator = AtomicInteger(1)
 
-  private val mSubjectSearchViewState: BehaviorSubject<Lce<List<Search>>> = BehaviorSubject.create()
+  private val mSubjectSearchViewState: BehaviorSubject<Lce<SearchUiData>> = BehaviorSubject.create()
 
   // A Flowable to keep the last state of View and observe the changing of state
-  val searchStates: Flowable<Lce<List<Search>>> =
+  val searchStates: Flowable<Lce<SearchUiData>> =
     mSubjectSearchViewState
       .toFlowable(LATEST) // if the stream is too fast and the View can NOT render new changes, previous states will be forbidden, and just the last state keep and show to user
       .distinctUntilChanged() // Wont emit new state until a difference there be in new state compare to the previous one
@@ -71,12 +72,12 @@ class MainViewModel(private val networkMovieBl: NetworkMovieBl) : ViewModel() {
                 result.getOrNull()!!.let { networkResultList ->
                   val searchList = networkResultList.map { Search.of(it) }
                   cache(searchList)
-                  Lce.success<List<Search>>(searchList)
+                  Lce.success<SearchUiData>(data = SearchUiData(searchParams = params, searchList = searchList))
                 }
               } else
-                Lce.failure<List<Search>>(result.exceptionOrNull()!!)
+                Lce.failure<SearchUiData>(result.exceptionOrNull()!!)
             }.onErrorResumeNextLceFailure()
-            .startWith(Lce.loading<List<Search>>())
+            .startWith(Lce.loading<SearchUiData>())
         }
         .onErrorResumeNextLceFailure() // this line is required to keep stream alive on errors
         .subscribeOn(Schedulers.io())
