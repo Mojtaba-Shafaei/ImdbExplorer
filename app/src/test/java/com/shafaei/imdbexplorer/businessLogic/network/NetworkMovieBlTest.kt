@@ -24,7 +24,7 @@ class NetworkMovieBlTest {
     val result = nb.search(params).blockingGet()
 
     assertTrue(result.isFailure)
-    assertEquals("Something went wrong.", result.exceptionOrNull()!!.message)
+    assertEquals("Incorrect IMDb ID.", result.exceptionOrNull()!!.message)
   }
 
   @Test
@@ -46,7 +46,7 @@ class NetworkMovieBlTest {
     val result = nb.getMovie(params).blockingGet()
 
     assertTrue(result.isFailure)
-    assertEquals("Something went wrong.", result.exceptionOrNull()!!.message)
+    assertEquals("Incorrect IMDb ID.", result.exceptionOrNull()!!.message)
   }
 
   @Test
