@@ -1,4 +1,4 @@
-## ImdbExplorer
+## IMDB Explorer
 Android Kotlin Application For Searching Movies Information.
 
 ### Used Libraries
@@ -29,9 +29,4 @@ rel="YouTube">![Mobile device](screen_captures/video_mock_tablet.png)</a>
 
 
 ### APK File
-Each release contains an APK file in Release section of github.
-
-<< OR >>
-
-Download latest apk file from "/built_apk" directory,
 [app.apk](built_apk/app.apk)
