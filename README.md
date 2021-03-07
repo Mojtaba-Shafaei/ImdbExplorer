@@ -5,8 +5,10 @@ Android Kotlin Application For Searching Movies Information.
 
 + [Kotlin](https://kotlinlang.org)
 + [RxJava](https://github.com/ReactiveX/RxJava) Asynchronous Programming With Observable Pattern.
++ [RxBinding](https://github.com/JakeWharton/RxBinding) RxJava Binding APIs For Android's UI Widgets.
 + [Koin](https://insert-koin.io) Smart Kotlin Dependency Injection
 + [Retrofit](https://square.github.io/retrofit) HTTP Client
++ [Glide](http://bumptech.github.io/glide) Image Loading.
 + [JUnit 4](https://junit.org/junit4)
 
 ### Screenshots
